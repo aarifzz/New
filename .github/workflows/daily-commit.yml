@@ -1,6 +1,6 @@
 name: Daily Commit – 24f2008535@ds.study.iitm.ac.in
 
-on:
+on: 
   schedule:
     - cron: '0 6 * * *'  # runs daily at 06:00 UTC
   workflow_dispatch:      # allows manual trigger
