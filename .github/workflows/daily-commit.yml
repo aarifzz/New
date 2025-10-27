@@ -1,0 +1,28 @@
+name: Daily Commit – 24f2008535@ds.study.iitm.ac.in
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # runs daily at 06:00 UTC
+  workflow_dispatch:      # allows manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  daily-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: 24f2008535@ds.study.iitm.ac.in – create commit
+        run: |
+          git config user.name "24f2008535@ds.study.iitm.ac.in"
+          git config user.email "24f2008535@ds.study.iitm.ac.in"
+          echo "Commit made at $(date -u)" >> daily-commit-log.txt
+          git add daily-commit-log.txt
+          git commit -m "Automated daily commit by 24f2008535@ds.study.iitm.ac.in"
+          git push origin HEAD
