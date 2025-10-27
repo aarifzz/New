@@ -1,9 +1,9 @@
 name: Daily Commit – 24f2008535@ds.study.iitm.ac.in
 
-on: 
+on:
   schedule:
     - cron: '0 6 * * *'  # runs daily at 06:00 UTC
-  workflow_dispatch:      # allows manual trigger
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -11,6 +11,7 @@ permissions:
 jobs:
   daily-commit:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,5 +25,10 @@ jobs:
           git config user.email "24f2008535@ds.study.iitm.ac.in"
           echo "Commit made at $(date -u)" >> daily-commit-log.txt
           git add daily-commit-log.txt
-          git commit -m "Automated daily commit by 24f2008535@ds.study.iitm.ac.in"
-          git push origin HEAD
+          git commit -m "Automated daily commit by 24f2008535@ds.study.iitm.ac.in" || echo "No changes to commit"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
